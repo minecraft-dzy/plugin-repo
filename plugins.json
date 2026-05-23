@@ -730,5 +730,9 @@
   {
     "id": "LowValueTarget.maibot-web-retriever",
     "repositoryUrl": "https://github.com/LowValueTarget777/maibot-web-retriever"
+  },
+  {
+    "id": "juzi865.initiative-talk-plugin",
+    "repositoryUrl": "https://github.com/juzi865/initiative-talk-plugin"
   }
 ]
