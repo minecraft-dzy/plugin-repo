@@ -3632,9 +3632,9 @@
     "id": "xuqian13.autonomous_planning_plugin",
     "manifest": {
       "manifest_version": 2,
-      "version": "4.0.0",
+      "version": "4.3.1",
       "name": "麦麦自主规划插件 v4",
-      "description": "让麦麦具备自主规划能力，通过 LLM 智能生成符合人设的日常生活日程。v4 全面基于 maibot_sdk 2.x 重写，支持新版 Host ↔ Runner 子进程架构，注入入口迁移到 HookHandler(maisaka.planner.before_request)。",
+      "description": "让麦麦具备自主规划能力，通过 LLM 智能生成符合人设的日常生活日程。v4.3.1 hotfix: 移除主程序未提供的 maisaka.replyer.before_request hook 依赖，让 v4.1+ 注入功能能真正生效。",
       "author": {
         "name": "靓仔",
         "url": "https://github.com/xuqian13"
@@ -3658,7 +3658,10 @@
         "config.get",
         "config.get_plugin",
         "llm.generate",
-        "message.get_recent"
+        "message.get_recent",
+        "message.get_by_time_in_chat",
+        "chat.get_all_streams",
+        "knowledge.search"
       ],
       "i18n": {
         "default_locale": "zh-CN",
@@ -4118,7 +4121,7 @@
     "manifest": {
       "manifest_version": 2,
       "id": "Rabbit-Jia-Er.MaiTrace",
-      "version": "3.0.0",
+      "version": "3.1.0",
       "name": "MaiTrace（麦时迹）",
       "description": "让麦麦发QQ空间、读说说、自动评论点赞、回复评论、写日记，支持日程驱动。",
       "author": {
@@ -4133,7 +4136,7 @@
       },
       "host_application": {
         "min_version": "1.0.0",
-        "max_version": "1.0.0"
+        "max_version": "1.99.99"
       },
       "sdk": {
         "min_version": "2.0.0",
@@ -4168,18 +4171,14 @@
       ],
       "capabilities": [
         "send.text",
-        "send.image",
-        "send.command",
         "config.get",
         "config.get_plugin",
         "llm.generate",
-        "llm.get_available_models",
         "message.get_by_time",
         "message.get_by_time_in_chat",
         "chat.get_stream_by_group_id",
         "chat.get_stream_by_user_id",
         "emoji.get_by_description",
-        "emoji.get_random",
         "database.get",
         "api.call"
       ],
@@ -8968,7 +8967,7 @@
       "manifest_version": 2,
       "id": "Emilia-awa.maibot-mimotts-voice",
       "name": "MiMo TTS Voice Clone",
-      "version": "1.0.0",
+      "version": "1.5.0",
       "description": "MiMo TTS Voice Clone Plugin for MaiBot - AI语音回复插件，支持自定义音色克隆和风格控制",
       "author": {
         "name": "Emilia-awa",
@@ -9416,7 +9415,7 @@
     "manifest": {
       "manifest_version": 2,
       "id": "com.auto-planning.schedule",
-      "version": "0.1.0",
+      "version": "0.3.0",
       "name": "AutoPlanning",
       "description": "为角色扮演 AI 自动生成每日日程，并在回复时注入当前时间附近的日程上下文，提升角色扮演真实感",
       "author": {
@@ -9493,7 +9492,7 @@
     "manifest": {
       "manifest_version": 2,
       "id": "LowValueTarget.maibot-web-retriever",
-      "version": "0.1.0",
+      "version": "0.1.2",
       "name": "maibot-web-retriever",
       "description": "基于 SearXNG + Crawl4AI 的网页检索插件，为 MaiBot 提供网页搜索与内容抓取能力。搜索-决策-抓取：AI 自主选择感兴趣的网页并抓取全文 Markdown。",
       "author": {
@@ -9522,7 +9521,8 @@
         }
       ],
       "capabilities": [
-        "send.text"
+        "send.text",
+        "llm.generate"
       ],
       "i18n": {
         "default_locale": "zh-CN",
@@ -9570,6 +9570,222 @@
         ]
       },
       "dependencies": []
+    }
+  },
+  {
+    "id": "luorogers.milky-adapter",
+    "manifest": {
+      "manifest_version": 2,
+      "version": "1.0.0",
+      "name": "Milky Adapter 适配器",
+      "description": "Milky 协议适配器，提供与 Milky 协议端的连接功能。",
+      "author": {
+        "name": "LuoRogers",
+        "url": "https://github.com/LuoRogers"
+      },
+      "license": "GPL-v3.0-or-later",
+      "urls": {
+        "repository": "https://github.com/LuoRogers/MaiBot-Milky-Adapter",
+        "homepage": "https://github.com/LuoRogers/MaiBot-Milky-Adapter",
+        "documentation": "https://github.com/LuoRogers/MaiBot-Milky-Adapter",
+        "issues": "https://github.com/LuoRogers/MaiBot-Milky-Adapter/issues"
+      },
+      "host_application": {
+        "min_version": "1.0.0",
+        "max_version": "1.0.0"
+      },
+      "sdk": {
+        "min_version": "2.0.0",
+        "max_version": "2.99.99"
+      },
+      "dependencies": [],
+      "capabilities": [],
+      "i18n": {
+        "default_locale": "zh-CN",
+        "supported_locales": [
+          "zh-CN",
+          "en-US"
+        ]
+      },
+      "id": "luorogers.milky-adapter"
+    }
+  },
+  {
+    "id": "RaTaiHok.human_reply_speed",
+    "manifest": {
+      "manifest_version": 2,
+      "version": "1.0.1",
+      "name": "麦麦拟人回复速度",
+      "description": "根据回复文本长度模拟真人打字耗时，让麦麦像正在输入后再发送消息",
+      "author": {
+        "name": "Neko_RTHsama",
+        "url": "https://github.com/RaTaiHok"
+      },
+      "license": "MIT License",
+      "urls": {
+        "repository": "https://github.com/RaTaiHok/human_reply_speed",
+        "homepage": "https://github.com/RaTaiHok/human_reply_speed",
+        "documentation": "https://github.com/RaTaiHok/human_reply_speed",
+        "issues": "https://github.com/RaTaiHok/human_reply_speed/issues"
+      },
+      "host_application": {
+        "min_version": "1.0.0",
+        "max_version": "1.0.0"
+      },
+      "sdk": {
+        "min_version": "2.4.0",
+        "max_version": "2.99.99"
+      },
+      "dependencies": [],
+      "capabilities": [],
+      "i18n": {
+        "default_locale": "zh-CN",
+        "locales_path": "i18n",
+        "supported_locales": [
+          "zh-CN",
+          "en-US"
+        ]
+      },
+      "id": "local.human-reply-speed"
+    }
+  },
+  {
+    "id": "bsyj.game-knowledge-plugin",
+    "manifest": {
+      "manifest_version": 2,
+      "id": "bsyj.game-knowledge-plugin",
+      "version": "1.0.2",
+      "name": "GameKnowledge",
+      "description": "Industrial-grade game knowledge analysis, storage, graph, and retrieval plugin for MaiBot.",
+      "author": {
+        "name": "bsyj",
+        "url": "https://github.com/bsyj/game-knowledge-plugin"
+      },
+      "license": "GPL-3.0-or-later",
+      "urls": {
+        "repository": "https://github.com/bsyj/game-knowledge-plugin",
+        "homepage": "https://github.com/bsyj/game-knowledge-plugin",
+        "documentation": "https://github.com/bsyj/game-knowledge-plugin/blob/master/README.md",
+        "issues": "https://github.com/bsyj/game-knowledge-plugin/issues"
+      },
+      "host_application": {
+        "min_version": "1.0.0",
+        "max_version": "1.99.99"
+      },
+      "sdk": {
+        "min_version": "2.0.0",
+        "max_version": "2.99.99"
+      },
+      "dependencies": [
+        {
+          "type": "python_package",
+          "name": "numpy",
+          "version_spec": ">=1.20.0"
+        },
+        {
+          "type": "python_package",
+          "name": "scipy",
+          "version_spec": ">=1.7.0"
+        },
+        {
+          "type": "python_package",
+          "name": "networkx",
+          "version_spec": ">=3.0.0"
+        },
+        {
+          "type": "python_package",
+          "name": "pyarrow",
+          "version_spec": ">=10.0.0"
+        },
+        {
+          "type": "python_package",
+          "name": "pandas",
+          "version_spec": ">=1.5.0"
+        },
+        {
+          "type": "python_package",
+          "name": "nest-asyncio",
+          "version_spec": ">=1.5.0"
+        },
+        {
+          "type": "python_package",
+          "name": "faiss-cpu",
+          "version_spec": ">=1.7.0"
+        },
+        {
+          "type": "python_package",
+          "name": "uvicorn",
+          "version_spec": ">=0.20.0"
+        },
+        {
+          "type": "python_package",
+          "name": "pydantic",
+          "version_spec": ">=2.0.0"
+        },
+        {
+          "type": "python_package",
+          "name": "python-multipart",
+          "version_spec": ">=0.0.9"
+        },
+        {
+          "type": "python_package",
+          "name": "openai",
+          "version_spec": ">=1.0.0"
+        },
+        {
+          "type": "python_package",
+          "name": "json-repair",
+          "version_spec": ">=0.30.0"
+        },
+        {
+          "type": "python_package",
+          "name": "aiohttp",
+          "version_spec": ">=3.8.0"
+        },
+        {
+          "type": "python_package",
+          "name": "psutil",
+          "version_spec": ">=5.9.0"
+        },
+        {
+          "type": "python_package",
+          "name": "tomlkit",
+          "version_spec": ">=0.12.0"
+        },
+        {
+          "type": "python_package",
+          "name": "rich",
+          "version_spec": ">=14.0.0"
+        },
+        {
+          "type": "python_package",
+          "name": "tenacity",
+          "version_spec": ">=8.0.0"
+        },
+        {
+          "type": "python_package",
+          "name": "jieba",
+          "version_spec": ">=0.42.1"
+        }
+      ],
+      "capabilities": [
+        "send.text",
+        "chat.get_stream_by_group_id",
+        "llm.generate",
+        "llm.embed",
+        "message.get_by_time_in_chat",
+        "message.build_readable",
+        "component.get_all_plugins",
+        "config.get",
+        "database.query",
+        "database.save",
+        "database.get",
+        "database.count",
+        "database.delete"
+      ],
+      "i18n": {
+        "default_locale": "zh-CN"
+      }
     }
   }
 ]
