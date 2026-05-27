@@ -46,19 +46,19 @@ jobs:
 
               const mainRepoUrls = new Set(mainPlugins.map(p => p.repositoryUrl));
               const mainPluginIds = new Set(mainPlugins.map(p => p.id));
-              
-              const newPlugins = prPlugins.filter(p => 
+
+              const newPlugins = prPlugins.filter(p =>
                 !mainRepoUrls.has(p.repositoryUrl) && !mainPluginIds.has(p.id)
               );
 
               const modifiedPlugins = prPlugins.filter(p => {
-                const mainPlugin = mainPlugins.find(mp => 
+                const mainPlugin = mainPlugins.find(mp =>
                   mp.repositoryUrl === p.repositoryUrl || mp.id === p.id
                 );
                 return mainPlugin && JSON.stringify(mainPlugin) !== JSON.stringify(p);
               });
 
-              const missingPlugins = mainPlugins.filter(mp => 
+              const missingPlugins = mainPlugins.filter(mp =>
                 !prPlugins.some(p => p.repositoryUrl === mp.repositoryUrl || p.id === mp.id)
               );
 
@@ -90,7 +90,7 @@ jobs:
               }
 
               let validationErrors = [];
-              
+
               for (const plugin of newPlugins) {
                 try {
                   console.log(`\n=== 验证新插件：${plugin.id} ===`);
@@ -137,11 +137,11 @@ jobs:
 
           function fetchManifest(repoUrl) {
             const branches = ['main', 'master', 'dev', 'develop'];
-            
+
             async function tryFetchFromBranch(branch) {
               const rawUrl = repoUrl.replace('github.com', 'raw.githubusercontent.com') + `/refs/heads/${branch}/_manifest.json`;
               console.log(`尝试从 ${branch} 分支获取清单文件：${rawUrl}`);
-              
+
               return new Promise((resolve, reject) => {
                 const timeout = setTimeout(() => {
                   reject(new Error(`获取清单文件超时（10秒）：${rawUrl}`));
@@ -149,11 +149,11 @@ jobs:
 
                 const req = https.get(rawUrl, res => {
                   clearTimeout(timeout);
-                  
+
                   if (res.statusCode !== 200) {
                     return reject(new Error(`状态码：${res.statusCode}`));
                   }
-                  
+
                   let data = '';
                   res.on('data', chunk => data += chunk);
                   res.on('end', () => {
@@ -184,7 +184,7 @@ jobs:
 
             return (async () => {
               const errors = [];
-              
+
               for (const branch of branches) {
                 try {
                   const result = await tryFetchFromBranch(branch);
@@ -195,7 +195,7 @@ jobs:
                   console.log(`❌ ${branch} 分支获取失败: ${error.message}`);
                 }
               }
-              
+
               throw new Error(`无法从任何分支获取 _manifest.json 文件。尝试的分支：${branches.join(', ')}。错误详情：\n${errors.map((err, i) => `${i + 1}. ${err}`).join('\n')}。\n\n请检查：\n1. 文件名是否为 '_manifest.json'（注意下划线）\n2. 仓库是否为公开仓库\n3. 文件是否存在于上述分支中\n仓库地址：${repoUrl}`);
             })();
           }
@@ -205,25 +205,71 @@ jobs:
               throw new Error('_manifest.json 文件为空或格式无效');
             }
 
-            const requiredFields = ['manifest_version', 'name', 'version', 'description', 'author', 'license', 'host_application'];
+            const requiredFields = [
+              'manifest_version',
+              'id',
+              'name',
+              'version',
+              'description',
+              'author',
+              'license',
+              'urls',
+              'host_application',
+              'sdk',
+              'capabilities',
+              'i18n'
+            ];
             for (const field of requiredFields) {
-              if (!manifest[field]) throw new Error(`_manifest.json 缺少必需字段：'${field}'`);
-            }
-            
-            if (typeof manifest.author !== 'object' || !manifest.author.name || !manifest.author.url) {
-                throw new Error("_manifest.json 'author' 字段必须是一个包含 'name' 和 'url' 属性的对象。");
-            }
-            if (typeof manifest.host_application !== 'object' || !manifest.host_application.min_version) {
-                throw new Error("_manifest.json 'host_application' 字段必须是一个包含 'min_version' 属性的对象。");
+              if (!manifest[field]) throw new Error(`_manifest.json 缺少 manifest v2 必需字段：'${field}'`);
             }
 
-            const versionRegex = /^\d+\.\d+\.\d+/;
-            if (!versionRegex.test(manifest.version)) {
-              console.warn(`警告：插件版本 '${manifest.version}' 不符合语义化版本格式（如：1.0.0）`);
+            if (manifest.manifest_version !== 2) {
+              throw new Error("_manifest.json 'manifest_version' 必须为 2。");
             }
 
-            if (plugin && plugin.id !== manifest.name) {
-              console.warn(`警告：plugins.json 中的插件 ID '${plugin.id}' 与清单文件中的名称 '${manifest.name}' 不同。建议保持一致。`);
+            const legacyFields = ['homepage_url', 'repository_url', 'categories', 'keywords', 'plugin_info', 'default_locale', 'locales_path'];
+            const legacyFieldsInManifest = legacyFields.filter(f => Object.prototype.hasOwnProperty.call(manifest, f));
+            if (legacyFieldsInManifest.length > 0) {
+              throw new Error(`_manifest.json 包含旧版或展示侧字段，请移除：${legacyFieldsInManifest.join(', ')}`);
+            }
+
+            const semverRegex = /^\d+\.\d+\.\d+$/;
+            const pluginIdRegex = /^[A-Za-z0-9_]+(?:[.-][A-Za-z0-9_]+)+$/;
+            const isObject = value => value && typeof value === 'object' && !Array.isArray(value);
+            const isHttpUrl = value => typeof value === 'string' && /^https?:\/\/.+/.test(value);
+
+            if (!pluginIdRegex.test(String(manifest.id || ''))) {
+              throw new Error("_manifest.json 'id' 字段格式错误，应使用点号或短横线分隔，例如 github.username.my-plugin。");
+            }
+            if (!semverRegex.test(String(manifest.version || ''))) {
+              throw new Error(`_manifest.json 'version' 必须为三段式版本号，例如 1.0.0，当前为 '${manifest.version}'。`);
+            }
+            if (!isObject(manifest.author) || !manifest.author.name || !isHttpUrl(manifest.author.url)) {
+              throw new Error("_manifest.json 'author' 字段必须是一个包含 'name' 和 HTTP/HTTPS 'url' 属性的对象。");
+            }
+            if (!isObject(manifest.urls) || !isHttpUrl(manifest.urls.repository)) {
+              throw new Error("_manifest.json 'urls.repository' 必须是 HTTP/HTTPS URL。");
+            }
+            for (const optionalUrlField of ['homepage', 'documentation', 'issues']) {
+              if (manifest.urls[optionalUrlField] !== undefined && !isHttpUrl(manifest.urls[optionalUrlField])) {
+                throw new Error(`_manifest.json 'urls.${optionalUrlField}' 必须是 HTTP/HTTPS URL。`);
+              }
+            }
+            for (const rangeField of ['host_application', 'sdk']) {
+              const rangeValue = manifest[rangeField];
+              if (!isObject(rangeValue) || !semverRegex.test(String(rangeValue.min_version || '')) || !semverRegex.test(String(rangeValue.max_version || ''))) {
+                throw new Error(`_manifest.json '${rangeField}' 必须包含三段式版本号 min_version 和 max_version。`);
+              }
+            }
+            if (!Array.isArray(manifest.capabilities) || manifest.capabilities.some(item => !String(item || '').trim())) {
+              throw new Error("_manifest.json 'capabilities' 必须是字符串数组；没有额外能力时请填写空数组 []。");
+            }
+            if (!isObject(manifest.i18n) || !String(manifest.i18n.default_locale || '').trim()) {
+              throw new Error("_manifest.json 'i18n' 必须至少包含 default_locale。");
+            }
+
+            if (plugin && plugin.id !== manifest.id) {
+              console.warn(`警告：plugins.json 中的插件 ID '${plugin.id}' 与清单文件中的 id '${manifest.id}' 不同。建议保持一致。`);
             }
 
             console.log(`插件清单结构有效：${manifest.name} v${manifest.version}`);

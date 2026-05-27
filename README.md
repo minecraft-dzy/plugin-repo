@@ -1,12 +1,12 @@
 # 麦麦 (MaiBot) 插件中心 (MaiBot Plugin Registry)
 
-[![Validate Plugins](https://github.com/MaiM-with-u/plugin-repo/actions/workflows/validate-pr.yml/badge.svg)](https://github.com/MaiM-with-u/plugin-repo/actions/workflows/validate-pr.yml)
-[![插件数量](https://img.shields.io/badge/dynamic/json?color=blue&label=plugins&query=%24.length&url=https%3A%2F%2Fraw.githubusercontent.com%2FMaiM-with-u%2Fplugin-repo%2Fmain%2Fplugins.json)](https://github.com/MaiM-with-u/plugin-repo/blob/main/plugins.json)
-[![GitHub Pages](https://img.shields.io/badge/插件展示-GitHub%20Pages-blue?logo=github)](https://maim-with-u.github.io/plugin-repo/)
+[![Validate Plugins](https://github.com/Mai-with-u/plugin-repo/actions/workflows/validate-issue.yml/badge.svg)](https://github.com/Mai-with-u/plugin-repo/actions/workflows/validate-issue.yml)
+[![插件数量](https://img.shields.io/badge/dynamic/json?color=blue&label=plugins&query=%24.length&url=https%3A%2F%2Fraw.githubusercontent.com%2FMai-with-u%2Fplugin-repo%2Fmain%2Fplugins.json)](https://github.com/Mai-with-u/plugin-repo/blob/main/plugins.json)
+[![GitHub Pages](https://img.shields.io/badge/插件展示-GitHub%20Pages-blue?logo=github)](https://mai-with-u.github.io/plugin-repo/)
 
 欢迎来到麦麦（MaiBot）官方社区插件索引仓库！
 
-这里是所有为 [麦麦 (MaiBot)](https://github.com/MaiM-with-u) 开发的社区插件的中央列表。我们的目标是建立一个开放、透明、高质量的插件生态系统。
+这里是所有为 [麦麦 (MaiBot)](https://github.com/Mai-with-u) 开发的社区插件的中央列表。我们的目标是建立一个开放、透明、高质量的插件生态系统。
 
 ## 🎯 插件展示页面 
 
@@ -24,7 +24,7 @@
 
 ## 🚀 如何贡献您的插件
 
-我们非常欢迎您为麦麦（MaiBot）生态贡献插件！提交您的插件非常简单，只需向本仓库发起一个 Pull Request (PR) 即可。
+我们非常欢迎您为麦麦（MaiBot）生态贡献插件！当前推荐通过 Issue 模板提交插件，CI 会自动读取插件仓库根目录的 `_manifest.json` v2 并完成校验。
 
 请详细阅读我们的 **[贡献指南 (CONTRIBUTING.md)](./CONTRIBUTING.md)**，其中包含了所有您需要了解的步骤和规范。
 

@@ -18,8 +18,8 @@ body:
     attributes:
       label: 当前插件 ID / Current Plugin ID
       description: |
-        必须是已存在的插件 ID（格式：作者名.插件名）
-        Must be an existing plugin ID (format: author.plugin)
+        必须是已存在的插件 ID
+        Must be an existing plugin ID
       placeholder: "例如: username.my-plugin"
     validations:
       required: true
@@ -29,9 +29,9 @@ body:
     attributes:
       label: 新插件 ID / New Plugin ID
       description: |
-        仅允许修改插件名部分，作者名必须保持一致
-        Only plugin suffix can change; author prefix must stay the same
-      placeholder: "例如: username.my-renamed-plugin"
+        建议与新 `_manifest.json` 中的 `id` 保持一致
+        Recommended to match the new `_manifest.json` `id`
+      placeholder: "例如: github.username.my-renamed-plugin"
     validations:
       required: true
 
@@ -58,7 +58,7 @@ body:
           required: true
         - label: "`author` 信息未变更 / `author` information is unchanged"
           required: true
-        - label: 插件 ID 与 manifest.name 保持一致 / Plugin ID matches manifest.name
+        - label: 插件 ID 与 manifest.id 保持一致 / Plugin ID matches manifest.id
           required: true
 
   - type: textarea

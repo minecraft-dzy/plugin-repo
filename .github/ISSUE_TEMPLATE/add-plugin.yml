@@ -18,9 +18,9 @@ body:
     attributes:
       label: 插件 ID / Plugin ID
       description: |
-        格式：`GitHub用户名.插件仓库名` 或 `插件名称`
-        Format: `GitHubUsername.PluginRepoName` or `PluginName`
-      placeholder: "例如: username.my-awesome-plugin"
+        建议与 `_manifest.json` 中的 `id` 保持一致，格式如 `github.username.my-awesome-plugin`
+        Recommended to match `_manifest.json` `id`, e.g. `github.username.my-awesome-plugin`
+      placeholder: "例如: github.username.my-awesome-plugin"
     validations:
       required: true
 
@@ -45,7 +45,7 @@ body:
           required: true
         - label: 仓库根目录包含 `_manifest.json` 文件 / Repository contains `_manifest.json` in root
           required: true
-        - label: manifest 包含所有必需字段 (name, version, author, license, host_application) / Manifest contains all required fields
+        - label: manifest 使用 `manifest_version: 2`，并包含 v2 必需字段 (id, name, version, author, license, urls, host_application, sdk, capabilities, i18n) / Manifest uses version 2 and contains all required v2 fields
           required: true
         - label: 仓库包含 LICENSE 文件 / Repository contains LICENSE file
           required: true
