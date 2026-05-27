@@ -762,5 +762,9 @@
   {
     "id": "whitefox.wife-picker",
     "repositoryUrl": "https://github.com/whitefox20011120/wife_picker"
+  },
+  {
+    "id": "octmicy.pixiv-crawler",
+    "repositoryUrl": "https://github.com/octmicy/pixiv-crawler"
   }
 ]
