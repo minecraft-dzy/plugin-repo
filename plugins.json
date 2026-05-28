@@ -766,5 +766,9 @@
   {
     "id": "octmicy.pixiv-crawler",
     "repositoryUrl": "https://github.com/octmicy/pixiv-crawler"
+  },
+  {
+    "id": "a-dawn.a-tts-plugin",
+    "repositoryUrl": "https://github.com/A-Dawn/A_TTS_Plugin"
   }
 ]
