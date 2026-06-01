@@ -8504,7 +8504,7 @@
     "id": "TAIY2020.smart_poke_plugin",
     "manifest": {
       "manifest_version": 2,
-      "version": "1.6.3",
+      "version": "1.6.4",
       "name": "智能戳一戳插件 | Smart Poke Plugin",
       "description": "一个让麦麦在 QQ 戳一戳里尽量像真人一样反应的拟人化交互插件。",
       "author": {
@@ -8545,6 +8545,13 @@
         "supported_locales": [
           "zh-CN"
         ]
+      },
+      "plugin_type": "game",
+      "display": {
+        "icon": {
+          "type": "local",
+          "value": "./poke.webp"
+        }
       },
       "id": "TAIY2020.smart_poke_plugin"
     }
@@ -9827,7 +9834,7 @@
     "manifest": {
       "manifest_version": 2,
       "id": "Emilia-awa.maibot-moepix",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "name": "maibot moepix",
       "description": "基于 Lolicon API 的二次元图片获取插件，支持 AI 智能调用和命令直接调用，并采取一系列防风控手段，内容级别采用白名单控制",
       "author": {
