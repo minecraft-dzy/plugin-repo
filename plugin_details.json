@@ -2557,35 +2557,67 @@
   {
     "id": "namchengwuqiu.gemini_drawer",
     "manifest": {
-      "manifest_version": 1,
+      "manifest_version": 2,
+      "id": "namchengwuqiu.gemini_drawer",
+      "version": "1.9.8",
       "name": "Gemini 绘图",
-      "version": "1.9.7",
       "description": "使用 Google Gemini API或着其他第三方平台提供的绘图服务，根据图片和提示词生成新图片。（现已支持视频生成）",
       "author": {
         "name": "sakura桜花",
         "url": "https://github.com/namchengwuqiu"
       },
       "license": "MIT",
+      "urls": {
+        "repository": "https://github.com/namchengwuqiu/gemini_drawer",
+        "homepage": "https://github.com/namchengwuqiu/gemini_drawer",
+        "documentation": "https://github.com/namchengwuqiu/gemini_drawer#readme",
+        "issues": "https://github.com/namchengwuqiu/gemini_drawer/issues"
+      },
       "host_application": {
-        "min_version": "0.10.0"
+        "min_version": "1.0.0",
+        "max_version": "1.99.99"
       },
-      "homepage_url": "https://github.com/namchengwuqiu/gemini_drawer",
-      "repository_url": "https://github.com/namchengwuqiu/gemini_drawer",
-      "keywords": [
-        "ai画图",
-        "绘图",
-        "ai视频生成",
-        "image"
-      ],
-      "categories": [
-        "Utilities",
-        "AI"
-      ],
-      "plugin_info": {
-        "is_built_in": false,
-        "plugin_type": "command"
+      "sdk": {
+        "min_version": "2.0.0",
+        "max_version": "2.99.99"
       },
-      "id": "sakura桜花.gemini_drawer"
+      "dependencies": [
+        {
+          "type": "python_package",
+          "name": "httpx",
+          "version_spec": ">=0.20.0"
+        },
+        {
+          "type": "python_package",
+          "name": "pillow",
+          "version_spec": ">=9.0.0"
+        },
+        {
+          "type": "python_package",
+          "name": "toml",
+          "version_spec": ">=0.10.0"
+        }
+      ],
+      "capabilities": [
+        "send.text",
+        "send.image",
+        "send.video",
+        "send.forward",
+        "send.hybrid",
+        "send.custom",
+        "send.command",
+        "api.call",
+        "config.get",
+        "llm.generate",
+        "database.get"
+      ],
+      "i18n": {
+        "default_locale": "zh-CN",
+        "supported_locales": [
+          "zh-CN"
+        ]
+      },
+      "plugin_type": "extension"
     }
   },
   {
@@ -2686,7 +2718,7 @@
     "id": "TAIY2020.custom_commands_plugin",
     "manifest": {
       "manifest_version": 2,
-      "version": "2.4.3",
+      "version": "2.4.5",
       "name": "自定义命令插件 | CustomCommands Plugin",
       "description": "一个允许你通过聊天命令动态添加、删除、列出和触发自定义回复的强大插件，支持群组数据隔离与自定义分组映射。",
       "author": {
@@ -2722,6 +2754,13 @@
         "supported_locales": [
           "zh-CN"
         ]
+      },
+      "plugin_type": "tool",
+      "display": {
+        "icon": {
+          "type": "local",
+          "value": "./command.svg"
+        }
       },
       "id": "TAIY2020.custom-commands-plugin"
     }
@@ -2880,7 +2919,7 @@
     "id": "TAIY2020.group_muter_plugin",
     "manifest": {
       "manifest_version": 2,
-      "version": "2.2.1",
+      "version": "2.2.3",
       "name": "群聊静音插件 | GroupMuter Plugin",
       "description": "一个允许管理员通过聊天命令，让麦麦在指定群聊中临时进入“静音状态”（闭嘴）的群组管理插件。",
       "author": {
@@ -2913,6 +2952,13 @@
         "supported_locales": [
           "zh-CN"
         ]
+      },
+      "plugin_type": "tool",
+      "display": {
+        "icon": {
+          "type": "local",
+          "value": "./mute.webp"
+        }
       },
       "id": "TAIY2020.group-muter-plugin"
     }
@@ -4158,63 +4204,53 @@
   {
     "id": "khiqwq.Maibot_daily_analysis",
     "manifest": {
-      "manifest_version": 1,
+      "manifest_version": 2,
+      "id": "khiqwq.daily_analysis",
+      "version": "2.2.0",
       "name": "每日分析插件",
-      "version": "1.2.1",
-      "description": "智能分析QQ群聊天记录并生成总结，支持精美图片输出。功能包括：群聊整体总结、单个用户总结、智能群友称号、群聊金句提取、炫压抑指数分析、每日定时自动总结。基于久远(saberlights)的原插件修改。",
+      "description": "智能分析 QQ 群聊天记录并生成精美图片总结。支持群聊整体总结、个人总结、智能群友称号、群聊金句、炫压抑评级、24小时活跃轨迹与每日定时自动总结。已适配 MaiBot 1.0 / maibot_sdk 2.x，使用宿主内置 HTML 渲染能力，无需自行安装浏览器依赖。",
       "author": {
         "name": "风花叶",
         "url": "https://github.com/khiqwq"
       },
       "license": "GPL-3.0-or-later",
+      "urls": {
+        "repository": "https://github.com/khiqwq/Maibot_daily_analysis",
+        "homepage": "https://github.com/khiqwq/Maibot_daily_analysis",
+        "documentation": "https://docs.mai-mai.org/develop/plugin_develop/",
+        "issues": "https://github.com/khiqwq/Maibot_daily_analysis/issues"
+      },
       "host_application": {
-        "min_version": "0.11.0"
+        "min_version": "1.0.0",
+        "max_version": "1.99.99"
       },
-      "homepage_url": "https://github.com/khiqwq/Maibot_daily_analysis",
-      "repository_url": "https://github.com/khiqwq/Maibot_daily_analysis",
-      "keywords": [
-        "chat",
-        "summary",
-        "群聊",
-        "总结",
-        "分析",
-        "图片生成"
+      "sdk": {
+        "min_version": "2.0.0",
+        "max_version": "2.99.99"
+      },
+      "dependencies": [
+        {
+          "type": "python_package",
+          "name": "jinja2",
+          "version_spec": ">=3.1.0"
+        }
       ],
-      "categories": [
-        "Utilities",
-        "Analysis"
+      "capabilities": [
+        "send.text",
+        "send.image",
+        "llm.generate",
+        "config.get",
+        "message.get_by_time_in_chat",
+        "chat.get_group_streams",
+        "render.html2png",
+        "maisaka.context.append"
       ],
-      "plugin_info": {
-        "is_built_in": false,
-        "components": [
-          {
-            "type": "command",
-            "name": "chat_summary",
-            "description": "生成群聊总结"
-          },
-          {
-            "type": "command",
-            "name": "user_summary",
-            "description": "生成个人总结"
-          },
-          {
-            "type": "event_handler",
-            "name": "daily_summary_handler",
-            "description": "每日定时自动生成群聊总结"
-          }
-        ],
-        "features": [
-          "群聊整体聊天记录总结",
-          "单个用户聊天记录总结",
-          "智能群友称号分析",
-          "群聊金句提取",
-          "炫压抑指数分析",
-          "精美图片输出",
-          "每日定时自动总结",
-          "24小时发言活跃度分布图表"
+      "i18n": {
+        "default_locale": "zh-CN",
+        "supported_locales": [
+          "zh-CN"
         ]
-      },
-      "id": "风花叶.Maibot_daily_analysis"
+      }
     }
   },
   {
@@ -6161,7 +6197,7 @@
                 "default": 24
               }
             },
-            "description": "孤立数据管理配置 (软删除与自动清理)"
+            "description": "孤立数据管理配置 (软删除与自���清理)"
           }
         }
       },
@@ -7865,14 +7901,15 @@
     "id": "SengokuCola.maimai-birdwatching-plugin",
     "manifest": {
       "manifest_version": 2,
-      "version": "1.1.1",
+      "version": "1.2.0",
       "name": "麦麦观鸟插件 (MaiMai Birdwatching Plugin)",
-      "description": "提供基于百度智能云图像识别接口的鸟类、动物、植物和菜品识别工具。",
+      "description": "提供基于百度智能云图像识别接口的鸟类、动物、植物、菜品识别工具，以及鸟类百科知识查询工具。",
       "author": {
         "name": "SengokuCola",
         "url": "https://github.com/SengokuCola"
       },
       "license": "MIT",
+      "plugin_type": "knowledge",
       "urls": {
         "repository": "https://github.com/SengokuCola/maimai_birdwatching_plugin",
         "homepage": "https://github.com/SengokuCola/maimai_birdwatching_plugin",
@@ -7891,6 +7928,14 @@
       "capabilities": [
         "message.get_by_id"
       ],
+      "display": {
+        "icon": {
+          "type": "local",
+          "value": "icon.jpg",
+          "fallback": "book-open",
+          "background": "#F0E1C7"
+        }
+      },
       "i18n": {
         "default_locale": "zh-CN",
         "locales_path": "_locales",
@@ -8109,9 +8154,9 @@
     "id": "maibot-team.snowluma-adapter",
     "manifest": {
       "manifest_version": 2,
-      "version": "0.5.0",
-      "name": "SnowLuma 适配器/ SnowLuma Adapter",
-      "description": "适用于SnowLuma的Maibot适配器/（开发版）/SnowLuma WebSocket adapter plugin for MaiBot message gateway.",
+      "version": "0.5.1",
+      "name": "SnowLuma 连接器（适配器）/ SnowLuma Adapter",
+      "description": "连接SnowLuma的Maibot连接器/SnowLuma WebSocket adapter plugin for MaiBot message gateway.",
       "author": {
         "name": "MaiBot Team",
         "url": "https://github.com/Mai-with-u/MaiBot-SnowLuma-Adapter"
@@ -8122,6 +8167,13 @@
         "homepage": "https://github.com/Mai-with-u/MaiBot-SnowLuma-Adapter",
         "documentation": "https://github.com/Mai-with-u/MaiBot-SnowLuma-Adapter",
         "issues": "https://github.com/Mai-with-u/MaiBot-SnowLuma-Adapter/issues"
+      },
+      "plugin_type": "adapter",
+      "display": {
+        "icon": {
+          "type": "local",
+          "value": "assets/icon.jpg"
+        }
       },
       "host_application": {
         "min_version": "1.0.0",
@@ -9017,7 +9069,7 @@
     "id": "TAIY2020.llm-balance-plugin",
     "manifest": {
       "manifest_version": 2,
-      "version": "1.5.3",
+      "version": "1.5.4",
       "name": "LLM 平台余额查询插件 | LLM Balance Plugin",
       "description": "通过聊天命令 /余额 并行查询 DeepSeek、SiliconFlow 的账号余额，支持 HTML 卡片可视化输出，仅依赖 Python 标准库。",
       "author": {
@@ -9051,6 +9103,13 @@
         "supported_locales": [
           "zh-CN"
         ]
+      },
+      "plugin_type": "tool",
+      "display": {
+        "icon": {
+          "type": "local",
+          "value": "./money.svg"
+        }
       },
       "id": "TAIY2020.llm-balance-plugin"
     }
@@ -9407,7 +9466,7 @@
     "id": "sengokucola.deepseek-thinking-marker",
     "manifest": {
       "manifest_version": 2,
-      "version": "0.1.1",
+      "version": "0.1.3",
       "name": "DeepSeek 思考模式 Marker",
       "description": "在 Maisaka planner 和 replyer 请求的第一条 user message 位置注入 DeepSeek V4 思考模式 marker，支持角色沉浸、纯分析和自定义模式。",
       "author": {
@@ -9415,6 +9474,7 @@
         "url": "https://github.com/SengokuCola"
       },
       "license": "GPL-v3.0-or-later",
+      "plugin_type": "extension",
       "urls": {
         "repository": "https://github.com/SengokuCola/deepseek_thinking_marker",
         "homepage": "https://github.com/SengokuCola/deepseek_thinking_marker",
@@ -9431,6 +9491,14 @@
       },
       "dependencies": [],
       "capabilities": [],
+      "display": {
+        "icon": {
+          "type": "local",
+          "value": "icon.jpg",
+          "fallback": "puzzle",
+          "background": "#F0E1C7"
+        }
+      },
       "i18n": {
         "default_locale": "zh-CN",
         "supported_locales": [
@@ -9920,7 +9988,7 @@
     "manifest": {
       "manifest_version": 2,
       "id": "com.claw.pixiv-crawler",
-      "version": "3.2.0",
+      "version": "3.2.1",
       "name": "麦麦!来点二次元图片!",
       "description": "基于 Lolicon API 的二次元随机图片插件。支持多标签组合搜索、定时/手动爬取、年龄分级、AI排除、@触发。无需 Pixiv 账号。",
       "author": {
@@ -10055,7 +10123,7 @@
     "manifest": {
       "manifest_version": 2,
       "id": "chi8wah.f1-info-plugin",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "name": "F1 资讯插件",
       "description": "查询 F1 赛历、赛果，并生成每日重要 F1 新闻一句话中文摘要。",
       "author": {
@@ -10137,6 +10205,91 @@
       ],
       "i18n": {
         "default_locale": "zh-CN"
+      }
+    }
+  },
+  {
+    "id": "chinokou.maidock",
+    "manifest": {
+      "manifest_version": 2,
+      "id": "chinokou.maidock",
+      "version": "1.0.3",
+      "name": "MaiDock",
+      "description": "为 MaiBot 提供额外的 OpenAI Responses API 与 Anthropic Messages API 端点支持。",
+      "author": {
+        "name": "ChinoKou",
+        "url": "https://github.com/ChinoKou"
+      },
+      "license": "GPL-v3.0-or-later",
+      "urls": {
+        "repository": "https://github.com/ChinoKou/MaiDock",
+        "homepage": "https://github.com/ChinoKou/MaiDock",
+        "documentation": "https://github.com/ChinoKou/MaiDock",
+        "issues": "https://github.com/ChinoKou/MaiDock/issues"
+      },
+      "host_application": {
+        "min_version": "1.0.0",
+        "max_version": "1.99.99"
+      },
+      "sdk": {
+        "min_version": "2.0.0",
+        "max_version": "2.99.99"
+      },
+      "dependencies": [
+        {
+          "type": "python_package",
+          "name": "openai",
+          "version_spec": ">=1.95.0"
+        },
+        {
+          "type": "python_package",
+          "name": "anthropic",
+          "version_spec": ">=0.105.2"
+        },
+        {
+          "type": "python_package",
+          "name": "pydantic",
+          "version_spec": ">=2.11.7"
+        },
+        {
+          "type": "python_package",
+          "name": "json-repair",
+          "version_spec": ">=0.47.6"
+        },
+        {
+          "type": "python_package",
+          "name": "pillow",
+          "version_spec": ">=11.3.0"
+        }
+      ],
+      "llm_providers": [
+        {
+          "client_type": "maidock-openai-responses",
+          "name": "MaiDock OpenAI Responses",
+          "description": "基于 OpenAI Responses API 的 LLM Provider。",
+          "version": "1.0.0"
+        },
+        {
+          "client_type": "maidock-anthropic-messages",
+          "name": "MaiDock Anthropic Messages",
+          "description": "基于 Anthropic Messages API 的 LLM Provider。",
+          "version": "1.0.0"
+        }
+      ],
+      "capabilities": [],
+      "i18n": {
+        "default_locale": "zh-CN",
+        "supported_locales": [
+          "zh-CN"
+        ]
+      },
+      "plugin_type": "provider",
+      "display": {
+        "icon": {
+          "type": "lucide",
+          "value": "dock",
+          "fallback": "plug"
+        }
       }
     }
   }
