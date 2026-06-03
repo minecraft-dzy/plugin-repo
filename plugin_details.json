@@ -2919,7 +2919,7 @@
     "id": "TAIY2020.group_muter_plugin",
     "manifest": {
       "manifest_version": 2,
-      "version": "2.2.3",
+      "version": "2.2.4",
       "name": "群聊静音插件 | GroupMuter Plugin",
       "description": "一个允许管理员通过聊天命令，让麦麦在指定群聊中临时进入“静音状态”（闭嘴）的群组管理插件。",
       "author": {
@@ -2957,7 +2957,7 @@
       "display": {
         "icon": {
           "type": "local",
-          "value": "./mute.webp"
+          "value": "./icon.webp"
         }
       },
       "id": "TAIY2020.group-muter-plugin"
@@ -6145,7 +6145,7 @@
           "reinforce_buffer_max_size": {
             "type": "integer",
             "default": 1000,
-            "description": "强化缓冲区最大大小"
+            "description": "���化缓冲区最大大小"
           },
           "reinforce_cooldown_hours": {
             "type": "number",
@@ -6197,7 +6197,7 @@
                 "default": 24
               }
             },
-            "description": "孤立数据管理配置 (软删除与自���清理)"
+            "description": "孤立数据管理配置 (软删除与自动清理)"
           }
         }
       },
@@ -8556,7 +8556,7 @@
     "id": "TAIY2020.smart_poke_plugin",
     "manifest": {
       "manifest_version": 2,
-      "version": "1.6.4",
+      "version": "1.6.6",
       "name": "智能戳一戳插件 | Smart Poke Plugin",
       "description": "一个让麦麦在 QQ 戳一戳里尽量像真人一样反应的拟人化交互插件。",
       "author": {
@@ -8602,7 +8602,7 @@
       "display": {
         "icon": {
           "type": "local",
-          "value": "./poke.webp"
+          "value": "./assets/icon.webp"
         }
       },
       "id": "TAIY2020.smart_poke_plugin"
@@ -9069,7 +9069,7 @@
     "id": "TAIY2020.llm-balance-plugin",
     "manifest": {
       "manifest_version": 2,
-      "version": "1.5.4",
+      "version": "1.5.5",
       "name": "LLM 平台余额查询插件 | LLM Balance Plugin",
       "description": "通过聊天命令 /余额 并行查询 DeepSeek、SiliconFlow 的账号余额，支持 HTML 卡片可视化输出，仅依赖 Python 标准库。",
       "author": {
@@ -9108,7 +9108,7 @@
       "display": {
         "icon": {
           "type": "local",
-          "value": "./money.svg"
+          "value": "./icon.svg"
         }
       },
       "id": "TAIY2020.llm-balance-plugin"
@@ -10290,6 +10290,169 @@
           "value": "dock",
           "fallback": "plug"
         }
+      }
+    }
+  },
+  {
+    "id": "deepseek-v4-pro.poke-reply-plugin",
+    "manifest": {
+      "manifest_version": 2,
+      "version": "1.0.0",
+      "name": "戳一戳自动回复插件",
+      "description": "接收 NapCat 适配器的 QQ 戳一戳事件，转发给 LLM 独立思考并自动回复，支持回戳",
+      "author": {
+        "name": "DeepSeek-V4",
+        "url": "https://github.com/DeepSeek-V4-Pro"
+      },
+      "license": "GPL-3.0-or-later",
+      "urls": {
+        "repository": "https://github.com/DeepSeek-V4-Pro/poke-reply-plugin",
+        "homepage": "https://github.com/DeepSeek-V4-Pro/poke-reply-plugin",
+        "documentation": "https://github.com/DeepSeek-V4-Pro/poke-reply-plugin",
+        "issues": "https://github.com/DeepSeek-V4-Pro/poke-reply-plugin/issues"
+      },
+      "host_application": {
+        "min_version": "1.0.0",
+        "max_version": "1.99.99"
+      },
+      "sdk": {
+        "min_version": "2.0.0",
+        "max_version": "2.99.99"
+      },
+      "dependencies": [],
+      "capabilities": [
+        "api.call",
+        "config.get"
+      ],
+      "i18n": {
+        "default_locale": "zh-CN",
+        "supported_locales": [
+          "zh-CN"
+        ]
+      },
+      "id": "deepseek-v4-pro.poke-reply-plugin"
+    }
+  },
+  {
+    "id": "deepseek-v4-pro.avatar-fetcher-plugin",
+    "manifest": {
+      "manifest_version": 2,
+      "version": "1.0.0",
+      "name": "头像获取插件 (Avatar Fetcher Plugin)",
+      "description": "通过指令获取 @用户 或指定 QQ 号的头像，以图片形式发送",
+      "author": {
+        "name": "DeepSeek-V4",
+        "url": "https://github.com/DeepSeek-V4-Pro"
+      },
+      "license": "GPL-3.0-or-later",
+      "urls": {
+        "repository": "https://github.com/DeepSeek-V4-Pro/avatar_fetcher_plugin",
+        "homepage": "https://github.com/DeepSeek-V4-Pro/avatar_fetcher_plugin"
+      },
+      "host_application": {
+        "min_version": "1.0.0",
+        "max_version": "1.99.99"
+      },
+      "sdk": {
+        "min_version": "2.0.0",
+        "max_version": "2.99.99"
+      },
+      "dependencies": [
+        {
+          "type": "python_package",
+          "name": "aiohttp",
+          "version_spec": ">=3.0.0"
+        }
+      ],
+      "capabilities": [
+        "send.text",
+        "send.image",
+        "config.get"
+      ],
+      "i18n": {
+        "default_locale": "zh-CN",
+        "supported_locales": [
+          "zh-CN"
+        ]
+      },
+      "id": "deepseek-v4-pro.avatar-fetcher-plugin"
+    }
+  },
+  {
+    "id": "local.message-debounce-cn",
+    "manifest": {
+      "manifest_version": 2,
+      "id": "local.message-debounce-cn",
+      "name": "消息防抖合并",
+      "version": "1.0.1",
+      "description": "短时间内合并同一会话同一用户的连续消息，再交给 MaiBot 处理，减少断句触发和重复思考。",
+      "author": {
+        "name": "tackyeel",
+        "url": "https://github.com/tackyeel"
+      },
+      "license": "MIT",
+      "urls": {
+        "repository": "https://github.com/tackyeel/Message-Debouncing",
+        "homepage": "https://github.com/tackyeel/Message-Debouncing",
+        "documentation": "https://github.com/tackyeel/Message-Debouncing"
+      },
+      "host_application": {
+        "min_version": "1.0.0",
+        "max_version": "1.0.0"
+      },
+      "sdk": {
+        "min_version": "2.4.0",
+        "max_version": "2.99.99"
+      },
+      "capabilities": [],
+      "dependencies": [],
+      "i18n": {
+        "default_locale": "zh-CN",
+        "supported_locales": [
+          "zh-CN"
+        ]
+      }
+    }
+  },
+  {
+    "id": "deepseek-v4-pro.self-writing-plugin",
+    "manifest": {
+      "manifest_version": 2,
+      "id": "deepseek-v4-pro.self-writing-plugin",
+      "version": "0.2.1",
+      "name": "插件自生成器",
+      "description": "让麦麦根据自然语言描述自动生成 MaiBot 插件代码，生成后可预览、确认或拒绝",
+      "author": {
+        "name": "DeepSeek-V4",
+        "url": "https://github.com/DeepSeek-V4-Pro"
+      },
+      "license": "GPL-3.0-or-later",
+      "urls": {
+        "repository": "https://github.com/DeepSeek-V4-Pro/self_writing_plugin",
+        "homepage": "https://github.com/DeepSeek-V4-Pro/self_writing_plugin",
+        "documentation": "https://github.com/DeepSeek-V4-Pro/self_writing_plugin",
+        "issues": "https://github.com/DeepSeek-V4-Pro/self_writing_plugin/issues"
+      },
+      "host_application": {
+        "min_version": "1.0.0",
+        "max_version": "1.99.99"
+      },
+      "sdk": {
+        "min_version": "2.0.0",
+        "max_version": "2.99.99"
+      },
+      "dependencies": [],
+      "capabilities": [
+        "llm.generate",
+        "send.text",
+        "send.forward",
+        "config.get"
+      ],
+      "i18n": {
+        "default_locale": "zh-CN",
+        "supported_locales": [
+          "zh-CN"
+        ]
       }
     }
   }
