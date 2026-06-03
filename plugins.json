@@ -806,5 +806,9 @@
   {
     "id": "onelxzy.partner-game",
     "repositoryUrl": "https://github.com/onelxzy/partner-game"
+  },
+  {
+    "id": "apcrote.context-miner",
+    "repositoryUrl": "https://github.com/clfr41/apcrote.context-miner"
   }
 ]
