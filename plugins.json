@@ -802,5 +802,9 @@
   {
     "id": "deepseek-v4-pro.self-writing-plugin",
     "repositoryUrl": "https://github.com/DeepSeek-V4-Pro/self_writing_plugin"
+  },
+  {
+    "id": "onelxzy.partner-game",
+    "repositoryUrl": "https://github.com/onelxzy/partner-game"
   }
 ]
