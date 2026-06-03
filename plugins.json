@@ -814,5 +814,9 @@
   {
     "id": "always-reply-private",
     "repositoryUrl": "https://github.com/YanRuo630/always-reply-private"
+  },
+  {
+    "id": "tackyeel.maibot-model-budget-router",
+    "repositoryUrl": "https://github.com/tackyeel/maibot-model-budget-router"
   }
 ]
