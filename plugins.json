@@ -818,5 +818,9 @@
   {
     "id": "tackyeel.maibot-model-budget-router",
     "repositoryUrl": "https://github.com/tackyeel/maibot-model-budget-router"
+  },
+  {
+    "id": "apcrotedev.hyw",
+    "repositoryUrl": "https://github.com/clfr41/apcrotedev.hyw"
   }
 ]
