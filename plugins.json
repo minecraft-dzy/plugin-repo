@@ -850,5 +850,9 @@
   {
     "id": "maimai-mcstatus-plugin",
     "repositoryUrl": "https://github.com/WhiteCloudOL/maimai-mcstatus-plugin"
+  },
+  {
+    "id": "github.sengokucola.statistics-chart-plugin",
+    "repositoryUrl": "https://github.com/SengokuCola/statistics-chart-plugin"
   }
 ]
