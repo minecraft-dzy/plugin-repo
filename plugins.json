@@ -854,5 +854,9 @@
   {
     "id": "github.sengokucola.statistics-chart-plugin",
     "repositoryUrl": "https://github.com/SengokuCola/statistics-chart-plugin"
+  },
+  {
+    "id": "deepseek-v4-pro.prp-prober",
+    "repositoryUrl": "https://github.com/DeepSeek-V4-Pro/prp_prober"
   }
 ]
