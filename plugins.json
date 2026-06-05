@@ -838,5 +838,9 @@
   {
     "id": "deepseek-v4-pro.system-info-plugin",
     "repositoryUrl": "https://github.com/DeepSeek-V4-Pro/system_info_plugin"
+  },
+  {
+    "id": "deepseek-v4-pro.semantic-loopback",
+    "repositoryUrl": "https://github.com/DeepSeek-V4-Pro/semantic_loopback_engine"
   }
 ]
