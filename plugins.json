@@ -846,5 +846,9 @@
   {
     "id": "whitefox.group-request-handler",
     "repositoryUrl": "https://github.com/whitefox20011120/group-request-handler"
+  },
+  {
+    "id": "maimai-mcstatus-plugin",
+    "repositoryUrl": "https://github.com/WhiteCloudOL/maimai-mcstatus-plugin"
   }
 ]
