@@ -7719,10 +7719,10 @@
       "license": "MIT",
       "plugin_type": "chat",
       "urls": {
-        "repository": "https://github.com/SengokuCola/MaiBot-rdev",
-        "homepage": "https://github.com/SengokuCola/MaiBot-rdev",
-        "documentation": "https://github.com/Mai-with-u/maibot-plugin-sdk/blob/main/docs/guide.md",
-        "issues": "https://github.com/SengokuCola/MaiBot-rdev/issues"
+        "repository": "https://github.com/SengokuCola/self_identity_plugin",
+        "homepage": "https://github.com/SengokuCola/self_identity_plugin",
+        "documentation": "https://github.com/SengokuCola/self_identity_plugin/blob/main/README.md",
+        "issues": "https://github.com/SengokuCola/self_identity_plugin/issues"
       },
       "host_application": {
         "min_version": "1.0.0",
@@ -7970,7 +7970,7 @@
     "id": "SengokuCola.maimai-niuniu-plugin",
     "manifest": {
       "manifest_version": 2,
-      "version": "1.3.1",
+      "version": "1.4.0",
       "name": "麦麦牛牛插件 (Maimai Niuniu Plugin)",
       "description": "夺舍牛牛，可以进行简单复读和说有趣的话",
       "author": {
@@ -7995,9 +7995,7 @@
       "dependencies": [],
       "capabilities": [
         "chat.get_group_streams",
-        "emoji.get_by_description",
         "message.get_recent",
-        "send.emoji",
         "send.image",
         "send.text"
       ],
@@ -11022,9 +11020,9 @@
     "id": "github.sengokucola.statistics-chart-plugin",
     "manifest": {
       "manifest_version": 2,
-      "version": "0.1.0",
-      "name": "Statistics Chart Plugin",
-      "description": "只读取本机 MaiBot 数据库，绘制消息、token、模型、工具、在线时长、交互消息和 Prompt Cache 命中等统计图。",
+      "version": "0.1.1",
+      "name": "麦麦统计图表！",
+      "description": "绘制MaiBot消息、token、模型、工具、在线时长、交互消息和 Prompt Cache 命中等统计图。",
       "author": {
         "name": "SengokuCola",
         "url": "https://github.com/SengokuCola"
