@@ -862,5 +862,9 @@
   {
     "id": "github.A-Dawn.mute-report-murmur",
     "repositoryUrl": "https://github.com/A-Dawn/mute_report_murmur"
+  },
+  {
+    "id": "taskmemz.wemai-adapter",
+    "repositoryUrl": "https://github.com/taskmemz/wemai-adaptor"
   }
 ]
