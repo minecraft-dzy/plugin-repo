@@ -866,5 +866,9 @@
   {
     "id": "taskmemz.wemai-adapter",
     "repositoryUrl": "https://github.com/taskmemz/wemai-adaptor"
+  },
+  {
+    "id": "deepseek-v4-pro.maimaidx-prober",
+    "repositoryUrl": "https://github.com/DeepSeek-V4-Pro/maimaidx_prober"
   }
 ]
