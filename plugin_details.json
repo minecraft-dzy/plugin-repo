@@ -2559,7 +2559,7 @@
     "manifest": {
       "manifest_version": 2,
       "id": "namchengwuqiu.gemini_drawer",
-      "version": "1.9.11",
+      "version": "1.9.12",
       "name": "Gemini 绘图",
       "description": "使用 Google Gemini API或着其他第三方平台提供的绘图服务，根据图片和提示词生成新图片。（现已支持视频生成）",
       "author": {
@@ -4979,7 +4979,7 @@
     "id": "ARC.A_Mind",
     "manifest": {
       "manifest_version": 2,
-      "version": "1.0.0",
+      "version": "1.0.1",
       "name": "A_Mind 智能话题管理插件",
       "description": "基于大模型的智能话题发起、追踪和回复插件，支持权限控制和自动状态管理",
       "author": {
@@ -6087,7 +6087,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "聊天流 ID ��表。支持格式: 1. 纯数字 (兼容模式); 2. 显式指定: 'group:12345'(群号), 'user:10001'(私聊), 'stream:hash'(流ID)"
+            "description": "聊天流 ID 列表。支持格式: 1. 纯数字 (兼容模式); 2. 显式指定: 'group:12345'(群号), 'user:10001'(私聊), 'stream:hash'(流ID)"
           }
         },
         "person_profile": {
@@ -6239,32 +6239,44 @@
   {
     "id": "wentaoxian6-svg.MaiBot-rule_horror_plugin",
     "manifest": {
-      "manifest_version": 1,
+      "manifest_version": 2,
+      "id": "wentaoxian6-svg.rule-horror-plugin",
+      "version": "2.3.0",
       "name": "规则怪谈插件",
-      "version": "2.2.0",
-      "description": "生成规则怪谈并进行互动游戏，支持LLM生成、提示、推理和多种结局判定",
+      "description": "生成规则怪谈并进行互动游戏，支持 LLM 生成、提示、推理和多种结局判定。",
       "author": {
         "name": "岚影鸿夜",
         "url": "https://github.com/wentaoxian6-svg"
       },
       "license": "MIT",
-      "homepage_url": "https://github.com/wentaoxian6-svg/MaiBot-rule_horror_plugin",
-      "repository_url": "https://github.com/wentaoxian6-svg/MaiBot-rule_horror_plugin",
-      "host_application": {
-        "min_version": "0.12.2"
+      "urls": {
+        "repository": "https://github.com/wentaoxian6-svg/MaiBot-rule_horror_plugin",
+        "homepage": "https://github.com/wentaoxian6-svg/MaiBot-rule_horror_plugin",
+        "documentation": "https://docs.mai-mai.org/develop/plugin-dev/",
+        "issues": "https://github.com/wentaoxian6-svg/MaiBot-rule_horror_plugin/issues"
       },
-      "keywords": [
-        "规则怪谈",
-        "游戏",
-        "LLM",
-        "互动",
-        "推理"
+      "host_application": {
+        "min_version": "1.0.0",
+        "max_version": "1.99.99"
+      },
+      "sdk": {
+        "min_version": "2.4.0",
+        "max_version": "2.99.99"
+      },
+      "dependencies": [],
+      "capabilities": [
+        "send.text",
+        "send.image",
+        "chat.get_stream_by_user_id",
+        "message.get_recent",
+        "config.get"
       ],
-      "categories": [
-        "Entertainment & Interaction",
-        "Content Generation"
-      ],
-      "id": "wentaoxian6-svg.MaiBot-rule_horror_plugin"
+      "i18n": {
+        "default_locale": "zh-CN",
+        "supported_locales": [
+          "zh-CN"
+        ]
+      }
     }
   },
   {
@@ -8584,7 +8596,7 @@
     "id": "TAIY2020.smart_poke_plugin",
     "manifest": {
       "manifest_version": 2,
-      "version": "1.7.3",
+      "version": "1.7.5",
       "name": "智能戳一戳插件 | Smart Poke Plugin",
       "description": "一个让麦麦在 QQ 戳一戳里尽量像真人一样反应的拟人化交互插件。",
       "author": {
@@ -8647,7 +8659,7 @@
     "manifest": {
       "manifest_version": 2,
       "id": "maimai-drawpic-plugin",
-      "version": "1.5.2",
+      "version": "1.6.0",
       "name": "麦麦绘图",
       "description": "让麦麦拥有图片创建与图片编辑的能力，支持多平台图片模型",
       "author": {
@@ -11467,9 +11479,9 @@
     "manifest": {
       "manifest_version": 2,
       "id": "com.0-hz.plastic-memory",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "name": "塑料内存条 (Plastic Memory)",
-      "description": "为麦麦提供一张可自行管理的便利贴笔记（my_memory.md），并在每次 planner / 时机判断 / replyer 请求的系统提示词之后注入笔记内容与剩余空间，供麦麦随时给自己留言备忘。",
+      "description": "为麦麦提供可自行管理的便利贴笔记（全局 my_memory.md 与按聊天流隔离的 chat_notes），并在 planner / 时机判断 / replyer 请求中注入笔记内容与剩余空间，供麦麦随时给自己留言备忘。",
       "author": {
         "name": "kes",
         "url": "https://github.com/yufei-pan"
