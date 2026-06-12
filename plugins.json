@@ -910,5 +910,9 @@
   {
     "id": "deepseek-v4-pro.phigros-b30",
     "repositoryUrl": "https://github.com/DeepSeek-V4-Pro/phigros-b30-plugin"
+  },
+  {
+    "id": "local.part.think",
+    "repositoryUrl": "https://github.com/clfr41/local.part.think"
   }
 ]
