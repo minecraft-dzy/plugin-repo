@@ -918,5 +918,9 @@
   {
     "id": "com.0-hz.image-recompress",
     "repositoryUrl": "https://github.com/yufei-pan/maibot-image-recompress"
+  },
+  {
+    "id": "juzi865.uno-game-plugin",
+    "repositoryUrl": "https://github.com/juzi865/UNO-"
   }
 ]
