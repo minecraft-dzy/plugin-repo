@@ -922,5 +922,9 @@
   {
     "id": "juzi865.uno-game-plugin",
     "repositoryUrl": "https://github.com/juzi865/UNO-"
+  },
+  {
+    "id": "com.0-hz.maibot-corpus-callosum",
+    "repositoryUrl": "https://github.com/yufei-pan/maibot-corpus-callosum"
   }
 ]
