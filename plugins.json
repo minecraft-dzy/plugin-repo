@@ -914,5 +914,9 @@
   {
     "id": "local.part.think",
     "repositoryUrl": "https://github.com/clfr41/local.part.think"
+  },
+  {
+    "id": "com.0-hz.image-recompress",
+    "repositoryUrl": "https://github.com/yufei-pan/maibot-image-recompress"
   }
 ]
