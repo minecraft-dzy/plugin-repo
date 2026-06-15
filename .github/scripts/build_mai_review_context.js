@@ -13,9 +13,6 @@ const IMPORTANT_FILES = [
   "pyproject.toml",
   "requirements.txt",
 ];
-const CODE_FILE_SUFFIXES = [".py", ".js", ".ts"];
-const RISK_PATTERN =
-  /\b(eval|exec|subprocess|os\.system|Popen|shell=True|requests\.|httpx\.|aiohttp|urllib|socket|open\(|write_text|write_bytes|unlink\(|remove\(|rmtree|shutil|sqlite|aiosqlite|api\.call|chat\.open_session|get_stream_by_|get_private_streams|get_group_streams|send\.image|send_image)\b/i;
 
 function requireEnv(name) {
   const value = process.env[name];
@@ -110,55 +107,6 @@ function sliceText(text, maxLength = 4000) {
   return text.length <= maxLength ? text : `${text.slice(0, maxLength)}\n...<truncated>`;
 }
 
-function buildRawFileUrl(repoUrl, branch, path) {
-  const rawBase = repoUrl.replace("github.com", "raw.githubusercontent.com");
-  return `${rawBase}/refs/heads/${branch}/${path}`;
-}
-
-async function fetchImportantFiles(repoUrl, branch, treeItems) {
-  const selectedPaths = new Set();
-
-  for (const file of IMPORTANT_FILES) {
-    if (treeItems.some((item) => item.path === file)) {
-      selectedPaths.add(file);
-    }
-  }
-
-  for (const item of treeItems) {
-    if (
-      CODE_FILE_SUFFIXES.some((suffix) => item.path.endsWith(suffix)) &&
-      !item.path.includes("/") &&
-      selectedPaths.size < 10
-    ) {
-      selectedPaths.add(item.path);
-    }
-  }
-
-  const files = [];
-  for (const path of selectedPaths) {
-    try {
-      const text = await fetchText(buildRawFileUrl(repoUrl, branch, path));
-      files.push({ path, content: sliceText(text) });
-    } catch (error) {
-      files.push({ path, content: `无法获取文件内容：${error.message}` });
-    }
-  }
-  return files;
-}
-
-function collectRiskHits(files) {
-  const hits = [];
-  for (const file of files) {
-    const lines = file.content.split("\n");
-    lines.forEach((line, index) => {
-      if (RISK_PATTERN.test(line)) {
-        hits.push(`${file.path}:${index + 1}: ${line.trim()}`);
-      }
-    });
-  }
-  return hits.slice(0, 40);
-}
-
 async function main() {
   const repository = requireEnv("REPOSITORY");
   const issueNumber = requireEnv("ISSUE_NUMBER");
@@ -181,9 +129,7 @@ async function main() {
   let manifestBranch = "";
   let manifestText = "";
   let manifestErrors = [];
-  let importantFiles = [];
-  let riskHits = [];
-
+  let repoFiles = [];
   if (pluginRepo) {
     pluginRepoInfo = await gh(`/repos/${pluginRepo}`);
     latestCommit = await gh(`/repos/${pluginRepo}/commits/${pluginRepoInfo.default_branch}`);
@@ -195,10 +141,11 @@ async function main() {
 
     try {
       const tree = await gh(`/repos/${pluginRepo}/git/trees/${pluginRepoInfo.default_branch}?recursive=1`);
-      importantFiles = await fetchImportantFiles(repoUrl, pluginRepoInfo.default_branch, tree.tree || []);
-      riskHits = collectRiskHits(importantFiles);
+      repoFiles = (tree.tree || [])
+        .filter((item) => item.type === "blob")
+        .map((item) => item.path);
     } catch (error) {
-      importantFiles = [{ path: "(tree)", content: `无法获取仓库树：${error.message}` }];
+      repoFiles = [`(无法获取仓库树: ${error.message})`];
     }
   }
 
@@ -236,6 +183,7 @@ async function main() {
     "",
     "## 插件仓库信息",
     `- 仓库 slug: ${pluginRepo || "(未解析)"}`,
+    `- 仓库地址: ${repoUrl || "(未解析)"}`,
     `- 默认分支: ${pluginRepoInfo?.default_branch || "(未知)"}`,
     `- 最近推送: ${pluginRepoInfo?.pushed_at || "(未知)"}`,
     `- 最新提交: ${latestCommit?.sha || "(未知)"}`,
@@ -253,15 +201,13 @@ async function main() {
   }
 
   lines.push(
-    "## 风险命中片段",
-    ...(riskHits.length > 0 ? riskHits : ["(未命中预设风险关键词)"]),
+    "## 建议优先检查的文件",
+    ...IMPORTANT_FILES.map((file) => `- ${file}`),
     "",
-    "## 关键文件摘录"
+    "## 仓库文件清单摘要",
+    ...(repoFiles.length > 0 ? repoFiles.slice(0, 200).map((path) => `- ${path}`) : ["(未获取到文件清单)"]),
+    ""
   );
-
-  for (const file of importantFiles) {
-    lines.push(`### ${file.path}`, file.content, "");
-  }
 
   fs.writeFileSync("mai-review-input.md", lines.join("\n"), "utf8");
 }
