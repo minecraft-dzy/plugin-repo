@@ -2,7 +2,7 @@ name: Mai Review Plugin Issue
 
 on:
   issues:
-    types: [opened]
+    types: [labeled]
   issue_comment:
     types: [created]
 
@@ -10,10 +10,10 @@ jobs:
   mai-review:
     if: >-
       (github.event_name == 'issues' &&
-       github.event.action == 'opened' &&
+       github.event.action == 'labeled' &&
        github.actor != 'github-actions[bot]' &&
-       (startsWith(github.event.issue.title, '[Plugin') ||
-        contains(github.event.issue.labels.*.name, 'plugin-submission') ||
+       github.event.label.name == 'validated' &&
+       (contains(github.event.issue.labels.*.name, 'plugin-submission') ||
         contains(github.event.issue.labels.*.name, 'plugin-modification') ||
         contains(github.event.issue.labels.*.name, 'plugin-removal'))) ||
       (github.event_name == 'issue_comment' &&
