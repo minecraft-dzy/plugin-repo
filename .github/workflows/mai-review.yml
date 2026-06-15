@@ -98,10 +98,11 @@ jobs:
         env:
           ARK_API_KEY: ${{ secrets.ARK_API_KEY }}
         run: |
+          PROMPT="$(cat .github/codex/prompts/plugin-issue-review.md)"
           codex exec \
-            --sandbox read-only \
+            --sandbox danger-full-access \
             --output-last-message codex-output.md \
-            - < .github/codex/prompts/plugin-issue-review.md
+            "$PROMPT"
 
       - name: Post review comment
         if: success()
