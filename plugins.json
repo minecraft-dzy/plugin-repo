@@ -946,5 +946,9 @@
   {
     "id": "com.0-hz.impression-card",
     "repositoryUrl": "https://github.com/yufei-pan/maibot-impression-card-plugin"
+  },
+  {
+    "id": "1m.nightmare",
+    "repositoryUrl": "https://github.com/Emaginations/Nightmare"
   }
 ]
